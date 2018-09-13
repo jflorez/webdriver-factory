@@ -1,5 +1,6 @@
 package com.jflorez.driver;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Set;
 
 import org.openqa.selenium.WebDriver;
@@ -14,15 +15,20 @@ public class LocalDriverFactory implements DriverFactory {
 	}
 
 	@Override
-	public WebDriver getDriver() throws Exception {
+	public WebDriver getDriver() {
 
 		Reflections reflections = new Reflections(WebDriver.class.getPackageName());
 		Set<Class<? extends WebDriver>> subTypes = reflections.getSubTypesOf(WebDriver.class);
-		return subTypes.stream()
-				       .filter(e -> e.getName().contains(browser.toLowerCase()))
-				       .findFirst()
-				       .get()
-				.getConstructor().newInstance();
+		try {
+			return subTypes.stream()
+					       .filter(e -> e.getName().contains(browser.toLowerCase()))
+					       .findFirst()
+					       .get()
+					.getConstructor().newInstance();
+		} catch (InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException
+				| NoSuchMethodException | SecurityException e) {
+			throw new RuntimeException(e);
+		}
 	}
 
 }

@@ -13,7 +13,7 @@ public class FirefoxDriverFactory implements DriverFactory {
 	}
 
 	@Override
-	public WebDriver getDriver() throws Exception {
+	public WebDriver getDriver() {
 		return new FirefoxDriver(firefoxOptions);
 	}
 

@@ -16,7 +16,7 @@ public class ChromeDriverFactory implements DriverFactory {
 	
 
 	@Override
-	public WebDriver getDriver() throws Exception {
+	public WebDriver getDriver() {
         return new ChromeDriver(options);
 	}
 }

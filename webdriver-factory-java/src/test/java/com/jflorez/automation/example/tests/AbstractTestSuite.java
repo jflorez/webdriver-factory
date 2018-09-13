@@ -18,7 +18,7 @@ public abstract class AbstractTestSuite {
 	
 
 	@BeforeEach
-	public void setupTest() throws Exception {
+	public void setupTest() {
 		driver = DriverFactoryBuilder.getFactory(EnvironmentVariables.getInstance().getBrowser()).getDriver();
 		driver.manage().timeouts().implicitlyWait(EnvironmentVariables.getInstance().getImplicitWait(),TimeUnit.SECONDS);
 		driver.manage().deleteAllCookies();
