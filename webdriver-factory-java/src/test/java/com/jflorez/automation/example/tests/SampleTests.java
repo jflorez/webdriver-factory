@@ -12,7 +12,7 @@ public class SampleTests extends AbstractTestSuite{
 		
 		driver.findElement(By.id("lst-ib")).sendKeys("Selenium webdriver");
 		driver.findElement(By.name("btnK")).click();
-		assertEquals("Selenium WebDriver", driver.findElement(By.linkText("Selenium WebDriver")));
+		assertEquals("Selenium WebDriver", driver.findElement(By.linkText("Selenium WebDriver")).getText());
 	}
 	
 }
