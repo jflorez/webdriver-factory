@@ -1,5 +1,6 @@
 package com.jflorez.driver;
 
+import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
@@ -18,5 +19,11 @@ public class ChromeDriverFactory implements DriverFactory {
 	@Override
 	public WebDriver getDriver() {
         return new ChromeDriver(options);
+	}
+
+
+	@Override
+	public Capabilities getCapabilities() {
+		return options;
 	}
 }

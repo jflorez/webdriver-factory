@@ -28,7 +28,7 @@ public class DriverFactoryBuilder {
 
 	}
 
-	public static DriverFactory getRemoteFactory(String browser, String gridURL) {
+	public static DriverFactory getFactory(String browser, String gridURL) {
 		return new RemoteDriverFactory(browser, gridURL);
 	}
 
