@@ -12,13 +12,13 @@ public class ChromeDriverFactory implements DriverFactory {
 	public ChromeDriverFactory() {
 		options = new ChromeOptions();
 		options.addArguments("test-type");
-        options.addArguments("disable-infobars");
+        	options.addArguments("disable-infobars");
 	}
 	
 
 	@Override
 	public WebDriver getDriver() {
-        return new ChromeDriver(options);
+        	return new ChromeDriver(options);
 	}
 
 
