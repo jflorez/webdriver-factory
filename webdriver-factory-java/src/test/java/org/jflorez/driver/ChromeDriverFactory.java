@@ -15,10 +15,10 @@ public class ChromeDriverFactory implements DriverFactory {
 	@Override
 	public Capabilities getCapabilities() {
 		return new ChromeOptions()
-//		.addArguments("--headless", 
-//				      "--disable-gpu", 
-//				      "--window-size=1920,1200",
-//				      "--ignore-certificate-errors")
+		.addArguments("--headless", 
+				      "--disable-gpu", 
+				      "--window-size=1920,1200",
+				      "--ignore-certificate-errors")
 		.setExperimentalOption("w3c", true); 
 	}
 
