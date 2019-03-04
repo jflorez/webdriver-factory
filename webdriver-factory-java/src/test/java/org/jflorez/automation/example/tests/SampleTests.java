@@ -12,7 +12,7 @@ public class SampleTests extends AbstractTestSuite {
 	@Test
 	public void sampleSeleniumTest1() {
 
-		driver.findElement(By.id("lst-ib")).sendKeys("Selenium WebDriver");
+		driver.findElement(By.name("q")).sendKeys("Selenium WebDriver");
 		driver.findElement(By.name("btnK")).click();
 		var element = new WebDriverWait(driver, 60)
 				.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Selenium WebDriver")));

@@ -32,9 +32,7 @@ public class DriverFactoryBuilder {
 		var factoryClasses = new HashMap<String, Class<? extends DriverFactory>>();
 		Reflections reflections = new Reflections(DriverFactoryBuilder.class.getPackageName());
 		Set<Class<? extends DriverFactory>> subTypes = reflections.getSubTypesOf(DriverFactory.class);
-		for (var type : subTypes) {
-			factoryClasses.put(type.getName().toLowerCase(), type);
-		}
+		subTypes.forEach(type->factoryClasses.put(type.getName().toLowerCase(), type));
 		return factoryClasses;
 	}
 
