@@ -2,6 +2,7 @@ package org.jflorez.automation.example.tests;
 
 import java.util.concurrent.TimeUnit;
 
+import org.jflorez.driver.DriverFactory;
 import org.jflorez.driver.DriverFactoryBuilder;
 import org.jflorez.environment.EnvironmentVariables;
 import org.junit.jupiter.api.AfterEach;
@@ -14,17 +15,17 @@ public abstract class AbstractTestSuite {
 
 	@BeforeEach
 	public void setupTest() throws Exception {
-		var gridUrl = EnvironmentVariables.getInstance().getGridURL();
-		var browser = EnvironmentVariables.getInstance().getBrowser();
+		String gridUrl = EnvironmentVariables.getGridURL();
+		String browser = EnvironmentVariables.getBrowser();
+		String url = EnvironmentVariables.getEnvironment();
+		int implicitWait = EnvironmentVariables.getImplicitWait();
+		DriverFactory driverFactory = (gridUrl != null && !gridUrl.isBlank()) ? DriverFactoryBuilder.getFactory(browser, gridUrl) : DriverFactoryBuilder.getFactory(browser);
 		
-		driver = (gridUrl != null && !gridUrl.isBlank()) 
-				? DriverFactoryBuilder.getFactory(browser, gridUrl).getDriver()
-				: DriverFactoryBuilder.getFactory(browser).getDriver();
-		driver.manage().timeouts().implicitlyWait(EnvironmentVariables.getInstance().getImplicitWait(),
-				TimeUnit.SECONDS);
+		driver = driverFactory.getDriver();
+		driver.manage().timeouts().implicitlyWait(implicitWait,TimeUnit.SECONDS);
 		driver.manage().deleteAllCookies();
 		driver.manage().window().maximize();
-		driver.navigate().to(EnvironmentVariables.getInstance().getEnvironment());
+		driver.navigate().to(url);
 	}
 
 	@AfterEach

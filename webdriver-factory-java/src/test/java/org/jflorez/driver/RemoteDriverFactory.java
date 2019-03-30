@@ -21,6 +21,7 @@ public class RemoteDriverFactory implements DriverFactory {
 		return new RemoteWebDriver(new URL(gridUrl),getCapabilities());
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Capabilities getCapabilities() throws Exception {
 		return DriverFactoryBuilder.getFactory(browser).getCapabilities();

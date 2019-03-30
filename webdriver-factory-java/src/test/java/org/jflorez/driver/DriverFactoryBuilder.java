@@ -1,39 +1,32 @@
 package org.jflorez.driver;
 
-import java.util.HashMap;
 import java.util.Map;
-import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.reflections.Reflections;
 
 public class DriverFactoryBuilder {
+
 	
-	public static DriverFactory getFactory(String browser) throws Exception{
-		try {
-			DriverFactory driverFactory = factoryClasses.entrySet()
-			        .stream()
-			        .filter(e -> e.getKey().contains(browser.toLowerCase()))
-			        .findFirst()
-			        .get()
-			        .getValue().getConstructor().newInstance();
-			return driverFactory;
-		} catch (Exception e) {
-			throw new Exception("Driver factory "+browser+ " not supported");
-		}
+	public static DriverFactory getFactory(String browser) throws Exception {
+		return factoryClasses.entrySet()
+				.stream()
+				.filter(e -> e.getKey().contains(browser.toLowerCase()))
+				.findFirst()
+				.orElseThrow(() -> new Exception("Driver factory " + browser + " not supported"))
+				.getValue()
+				.getConstructor()
+				.newInstance();
 	}
-	
+
 	public static DriverFactory getFactory(String browser, String gridUrl) throws Exception {
 		return new RemoteDriverFactory(browser, gridUrl);
 	}
-	
-	private static final Map<String, Class<? extends DriverFactory>> factoryClasses = loadFactoryClasses();
-	
-	private static Map<String, Class<? extends DriverFactory>> loadFactoryClasses() {
-		var factoryClasses = new HashMap<String, Class<? extends DriverFactory>>();
-		Reflections reflections = new Reflections(DriverFactoryBuilder.class.getPackageName());
-		Set<Class<? extends DriverFactory>> subTypes = reflections.getSubTypesOf(DriverFactory.class);
-		subTypes.forEach(type->factoryClasses.put(type.getName().toLowerCase(), type));
-		return factoryClasses;
-	}
+
+	private static final Map<String, Class<? extends DriverFactory>> factoryClasses = new Reflections(
+			DriverFactoryBuilder.class.getPackageName())
+				.getSubTypesOf(DriverFactory.class)
+				.stream()
+				.collect(Collectors.toMap(type -> type.getName().toLowerCase(), type -> type));
 
 }
