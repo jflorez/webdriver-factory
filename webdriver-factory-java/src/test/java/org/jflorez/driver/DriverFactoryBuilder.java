@@ -8,18 +8,21 @@ import org.reflections.Reflections;
 public class DriverFactoryBuilder {
 
 	
-	public static DriverFactory getFactory(String browser) throws Exception {
-		return factoryClasses.entrySet()
-				.stream()
-				.filter(e -> e.getKey().contains(browser.toLowerCase()))
-				.findFirst()
-				.orElseThrow(() -> new Exception("Driver factory " + browser + " not supported"))
-				.getValue()
-				.getConstructor()
-				.newInstance();
+	public static DriverFactory getFactory(String browser) {
+		try {
+			return factoryClasses.entrySet()
+			        .stream()
+			        .filter(e -> e.getKey().toLowerCase().contains(browser.toLowerCase()))
+			        .findFirst()
+			        .orElseThrow()
+			        .getValue().getConstructor().newInstance();
+
+		} catch (Exception e) {
+			throw new RuntimeException("Driver factory "+browser+ " not supported");
+		}
 	}
 
-	public static DriverFactory getFactory(String browser, String gridUrl) throws Exception {
+	public static DriverFactory getFactory(String browser, String gridUrl) {
 		return new RemoteDriverFactory(browser, gridUrl);
 	}
 

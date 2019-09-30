@@ -4,18 +4,17 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxOptions;
 
-public class FirefoxDriverFactory implements DriverFactory {
+public class FirefoxDriverFactory extends AbstractDriverFactory {
 
 	@Override
-	public WebDriver getDriver() throws Exception {
+	protected WebDriver buildDriver() {
 		return new FirefoxDriver(getCapabilities());
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
-	public FirefoxOptions getCapabilities() throws Exception {
+	public FirefoxOptions getCapabilities() {
 		FirefoxOptions options = new FirefoxOptions().addArguments("-width 1920","-height 1200");
-		options.setHeadless(true);
+		options.setHeadless(this.headless);
 		return options;
 	}
 

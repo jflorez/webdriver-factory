@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 
 public interface DriverFactory {
 	
-	public WebDriver getDriver() throws Exception;
-	public <T extends Capabilities> T getCapabilities()  throws Exception;
-
+	WebDriver getDriver();
+	Capabilities getCapabilities();
+	DriverFactory setHeadless(boolean isHeadless);
 }

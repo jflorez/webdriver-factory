@@ -15,15 +15,16 @@ public abstract class AbstractTestSuite {
 
 	@BeforeEach
 	public void setupTest() throws Exception {
-		String gridUrl = EnvironmentVariables.getGridURL();
-		String browser = EnvironmentVariables.getBrowser();
-		String url = EnvironmentVariables.getEnvironment();
-		int implicitWait = EnvironmentVariables.getImplicitWait();
-		DriverFactory driverFactory = (gridUrl != null && !gridUrl.isBlank()) ? DriverFactoryBuilder.getFactory(browser, gridUrl) : DriverFactoryBuilder.getFactory(browser);
+		var gridUrl = EnvironmentVariables.getInstance().getGridURL();
+		var browser = EnvironmentVariables.getInstance().getBrowser();
+		var headless = EnvironmentVariables.getInstance().isHeadless();
+		var implicitWait = EnvironmentVariables.getInstance().getImplicitWait();
+		var url = EnvironmentVariables.getInstance().getEnvironment();
 		
-		driver = driverFactory.getDriver();
+		driver = (gridUrl != null && !gridUrl.isBlank()) 
+				? DriverFactoryBuilder.getFactory(browser, gridUrl).getDriver()
+				: DriverFactoryBuilder.getFactory(browser).setHeadless(headless).getDriver();
 		driver.manage().timeouts().implicitlyWait(implicitWait,TimeUnit.SECONDS);
-		driver.manage().deleteAllCookies();
 		driver.manage().window().maximize();
 		driver.navigate().to(url);
 	}

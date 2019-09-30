@@ -4,19 +4,18 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-public class ChromeDriverFactory implements DriverFactory {
+public class ChromeDriverFactory extends AbstractDriverFactory {
 
 	@Override
-	public WebDriver getDriver() throws Exception {
+	protected WebDriver buildDriver() {
         return new ChromeDriver(getCapabilities());
 	}
 
-	@SuppressWarnings("unchecked")
 	@Override
 	public ChromeOptions getCapabilities() {
 		return new ChromeOptions()
-		.addArguments("--headless", 
-				      "--disable-gpu", 
+		.setHeadless(this.headless)
+		.addArguments("--disable-gpu", 
 				      "--window-size=1920,1200",
 				      "--ignore-certificate-errors")
 		.setExperimentalOption("w3c", true); 
