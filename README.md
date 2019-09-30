@@ -8,6 +8,7 @@ This project assumes that the diver executable for a given browser is already in
 The initial implementation is done in Java. Other languajes (C#, and Python, for now) will follow.
 
 The follwing mandatory environment variables must be set before running the sample tests:
-* Environment = https://www.google.com
-* Browser = Chrome
-* ImplicitWait = 3
+* SELENIUM_URL = https://www.google.com
+* SELENIUM_BROWSER = Chrome
+* SELENIUM_WAIT = 3
+* SELENIUM_HEADLESS = false
