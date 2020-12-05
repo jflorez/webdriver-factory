@@ -11,12 +11,11 @@ public class SampleTests extends AbstractTestSuite {
 
 	@Test
 	public void sampleSeleniumTest1() {
-
 		driver.findElement(By.name("q")).sendKeys("Selenium WebDriver");
 		driver.findElement(By.name("btnK")).click();
-		var element = new WebDriverWait(driver, 60)
-				.until(ExpectedConditions.visibilityOfElementLocated(By.linkText("Selenium WebDriver")));
-		assertEquals("Selenium WebDriver", element.getText());
+		var linkLocator = By.linkText("Selenium WebDriver");
+		new WebDriverWait(driver, 60).until(d -> d.findElement(linkLocator).isDisplayed());
+		assertEquals("Selenium WebDriver", driver.findElement(linkLocator).getText());
 	}
 
 }
