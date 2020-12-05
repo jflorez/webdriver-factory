@@ -2,7 +2,6 @@ package org.jflorez.automation.example.tests;
 
 import java.util.concurrent.TimeUnit;
 
-import org.jflorez.driver.DriverFactory;
 import org.jflorez.driver.DriverFactoryBuilder;
 import org.jflorez.environment.EnvironmentVariables;
 import org.junit.jupiter.api.AfterEach;
