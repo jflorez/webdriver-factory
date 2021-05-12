@@ -1,3 +1,10 @@
 
-vmPool: ubuntu-latest
-
+pool:
+    vmImage: 'ubuntu-latest'
+steps:
+- task: Maven@3
+  inputs:
+    mavenPomFile: 'pom.xml'
+    goals: 'test'
+    publishJUnitResults: true
+    testResultsFiles: '**/surefire-reports/TEST-*.xml'
