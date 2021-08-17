@@ -11,7 +11,16 @@ pool:
 
 steps:
 - script: |
-    docker-compose -f .devcontainer/docker-compose.yml up -d
-    docker network ls
-    docker ps
+    docker-compose -f .devcontainer/docker-compose.yml build
   displayName: 'Create docker environment'
+
+- script: ls -lha
+  target: devcontainer_dev-environment
+# container: devcontainer_dev-environment # TODO connect this container to the compose network devcontainer_default
+
+# - tasks: Maven@3
+#   inputs:
+#     mavenPomFile: 'pom.xml'
+#     mavenOptions: '-Xmx3072m'
+#     testResultsFiles: '**/TEST-*.xml'
+#     goals: 'test'
