@@ -6,14 +6,17 @@
 trigger:
 - master
 
+resources:
+  containers:
+    - container: devcontainer_dev-environment
+      image: devcontainer_dev-environment
+
 pool:
   vmImage: ubuntu-latest
 
 steps:
 - script: docker-compose -f .devcontainer/docker-compose.yml build
   displayName: 'Create docker environment'
-
-container: devcontainer_dev-environment
 
 steps:
 - script: ls -lha
