@@ -21,10 +21,10 @@ steps:
       java -version
       javac -version
     env:
-      JAVA_HOME=/usr/lib/jvm/adoptopenjdk-16-hotspot-amd64
-      M2_HOME=/opt/maven
-      MAVEN_HOME=/opt/maven
-      PATH=$M2_HOME/bin:$PATH
+      JAVA_HOME: /usr/lib/jvm/adoptopenjdk-16-hotspot-amd64
+      M2_HOME: /opt/maven
+      MAVEN_HOME: /opt/maven
+      PATH: $M2_HOME/bin:$PATH
 # - tasks: Maven@3
 #   inputs:
 #     mavenPomFile: 'pom.xml'
