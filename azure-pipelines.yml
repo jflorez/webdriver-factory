@@ -17,7 +17,8 @@ steps:
       sudo add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
       sudo apt-get update
       sudo apt-get install -y adoptopenjdk-16-hotspot
-  - script: |
+  - script: echo $PATH
+  - bash: |
       java -version
       javac -version
     env:
