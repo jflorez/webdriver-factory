@@ -11,12 +11,12 @@ pool:
 
 steps:
   - script: |
-    apt-get update
-    apt-get install -y wget software-properties-common
-    wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | apt-key add -
-    add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
-    apt-get update
-    apt-get install -y adoptopenjdk-16-hotspot
+      apt-get update
+      apt-get install -y wget software-properties-common
+      wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | apt-key add -
+      add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
+      apt-get update
+      apt-get install -y adoptopenjdk-16-hotspot
   - script: |
       java -version
       javac -version
