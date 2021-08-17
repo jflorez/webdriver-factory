@@ -15,13 +15,14 @@ jobs:
   - script: docker-compose -f .devcontainer/docker-compose.yml up -d
 
 - job: verify
+  dependsOn: setup
   steps:
   - script: |
       docker ps
       docker network ls
 
 - job: run_test
-  dependsOn: setup
+  dependsOn: verify
   container: devcontainer_dev-environment
   steps:
   - script: ls -lha
