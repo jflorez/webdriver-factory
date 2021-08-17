@@ -14,6 +14,12 @@ jobs:
   steps:
   - script: docker-compose -f .devcontainer/docker-compose.yml up -d
 
+- job: verify
+  steps:
+  - script: |
+      docker ps
+      docker network ls
+
 - job: run_test
   dependsOn: setup
   container: devcontainer_dev-environment
