@@ -10,23 +10,10 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
-  - script: |
-      sudo apt-get update
-      sudo apt-get install -y wget software-properties-common
-      wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | apt-key add -
-      sudo add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
-      sudo apt-get update
-      sudo apt-get install -y adoptopenjdk-16-hotspot
-  - script: echo $PATH
   - bash: |
-      echo '##vso[task.setvariable variable=path]/opt/maven/bin:/usr/lib/jvm/adoptopenjdk-16-hotspot-amd64/bin:$(PATH)'
       java -version
       javac -version
       mvn -version
-    env:
-      JAVA_HOME: /usr/lib/jvm/adoptopenjdk-16-hotspot-amd64
-      M2_HOME: /opt/maven
-      MAVEN_HOME: /opt/maven
 # - tasks: Maven@3
 #   inputs:
 #     mavenPomFile: 'pom.xml'
