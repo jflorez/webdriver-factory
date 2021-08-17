@@ -16,6 +16,7 @@ jobs:
 
 - job: run_test  
   container: devcontainer_dev-environment
+  steps:
   - script: ls -lha
     
 # container: devcontainer_dev-environment # TODO connect this container to the compose network devcontainer_default
