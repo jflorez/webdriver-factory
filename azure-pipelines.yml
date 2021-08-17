@@ -12,9 +12,10 @@ pool:
 jobs:
 - job: setup
   steps:
-  - script: docker-compose -f .devcontainer/docker-compose.yml build
+  - script: docker-compose -f .devcontainer/docker-compose.yml up -d
 
-- job: run_test  
+- job: run_test
+  dependsOn: setup
   container: devcontainer_dev-environment
   steps:
   - script: ls -lha
