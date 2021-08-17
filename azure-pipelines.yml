@@ -9,26 +9,17 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-jobs:
-- job: setup
-  steps:
-  - script: docker-compose -f .devcontainer/docker-compose.yml up -d
-
-- job: verify
-  dependsOn: setup
-  steps:
+steps:
   - script: |
-      docker ps
-      docker network ls
-
-- job: run_test
-  dependsOn: verify
-  container: devcontainer_dev-environment
-  steps:
-  - script: ls -lha
-    
-# container: devcontainer_dev-environment # TODO connect this container to the compose network devcontainer_default
-
+    apt-get update
+    apt-get install -y wget software-properties-common
+    wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | apt-key add -
+    add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
+    apt-get update
+    apt-get install -y adoptopenjdk-16-hotspot
+  - script: |
+      java -version
+      javac -version
 # - tasks: Maven@3
 #   inputs:
 #     mavenPomFile: 'pom.xml'
