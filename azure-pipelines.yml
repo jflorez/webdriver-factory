@@ -18,7 +18,6 @@ steps:
 - script: docker-compose -f .devcontainer/docker-compose.yml build
   displayName: 'Create docker environment'
 
-steps:
 - script: ls -lha
   target: devcontainer_dev-environment
 # container: devcontainer_dev-environment # TODO connect this container to the compose network devcontainer_default
