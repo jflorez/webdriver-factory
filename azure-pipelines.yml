@@ -30,7 +30,7 @@ steps:
       cleanDestinationDirectory: true
   - bash: docker-compose -f .devcontainer/docker-compose.yml up -d
     displayName: Run selenium grid
-  - tasks: Maven@3
+  - task: Maven@3
     inputs:
       mavenPomFile: 'pom.xml'
       mavenOptions: '-Xmx3072m'
