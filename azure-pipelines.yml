@@ -11,15 +11,20 @@ pool:
 
 steps:
   - script: |
-      apt-get update
-      apt-get install -y wget software-properties-common
+      sudo apt-get update
+      sudo apt-get install -y wget software-properties-common
       wget -qO - https://adoptopenjdk.jfrog.io/adoptopenjdk/api/gpg/key/public | apt-key add -
-      add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
-      apt-get update
-      apt-get install -y adoptopenjdk-16-hotspot
+      sudo add-apt-repository --yes https://adoptopenjdk.jfrog.io/adoptopenjdk/deb/
+      sudo apt-get update
+      sudo apt-get install -y adoptopenjdk-16-hotspot
   - script: |
       java -version
       javac -version
+    env:
+      JAVA_HOME=/usr/lib/jvm/adoptopenjdk-16-hotspot-amd64
+      M2_HOME=/opt/maven
+      MAVEN_HOME=/opt/maven
+      PATH=$M2_HOME/bin:$PATH
 # - tasks: Maven@3
 #   inputs:
 #     mavenPomFile: 'pom.xml'
