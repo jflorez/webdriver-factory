@@ -6,20 +6,18 @@
 trigger:
 - master
 
-resources:
-  containers:
-    - container: devcontainer_dev-environment
-      image: devcontainer_dev-environment
-
 pool:
   vmImage: ubuntu-latest
 
-steps:
-- script: docker-compose -f .devcontainer/docker-compose.yml build
-  displayName: 'Create docker environment'
+jobs:
+- job: setup
+  steps:
+  - script: docker-compose -f .devcontainer/docker-compose.yml build
 
-- script: ls -lha
-  target: devcontainer_dev-environment
+- job: run_test  
+  container: devcontainer_dev-environment
+  - script: ls -lha
+    
 # container: devcontainer_dev-environment # TODO connect this container to the compose network devcontainer_default
 
 # - tasks: Maven@3
